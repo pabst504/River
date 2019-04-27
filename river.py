@@ -71,32 +71,6 @@ def playTV(random):
     time.sleep(10) 
     pyautogui.hotkey('command','w')
 
-def playtest(playlist):
-
-    print("test 0.0")
-    
-    playlist = playlist.replace(' ','')
-    conn = sqlite3.connect(os.path.join('catalog.db'))
-    cur = conn.cursor()
-    sqlinput = ("SELECT * FROM "+playlist+" ORDER BY RANDOM() LIMIT 1;")
-    cur.execute(sqlinput)
-    output = cur.fetchall()
-
-    showID = output[0][0]
-    runtime = output[0][1]
-    runtime = int(runtime)
-
-    chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
-    print("test 0")
-    base = 'http://www.netflix.com/watch/'
-    target = ''.join([base,showID])
-
-    webbrowser.get(chrome_path).open_new(target)
-    time.sleep(runtime)
-    pyautogui.hotkey('command','w') #Security Preferences > Security & Privacy > Privacy > Accessibility
-    
-    playtest(playlist)
-
     
 def populatelist(self):
     conn = sqlite3.connect(os.path.join('catalog.db'))
